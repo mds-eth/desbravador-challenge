@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 
+import { toast } from 'react-toastify';
+
 const SearchForm = ({ onSearch }) => {
   const [username, setUsername] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!username) {
+      return toast.warning('Favor informar usuário a ser localizado.');
+    }
     onSearch(username);
   };
 

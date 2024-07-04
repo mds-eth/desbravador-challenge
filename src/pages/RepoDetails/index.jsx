@@ -1,41 +1,37 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import GitHubAPI from '../../api/api.js';
+import Header from '../../components/Header/index.jsx';
+import './styles.js';
+import { Container, DashboardContainer, Details, RepoDetailsComponent, ReposContainer, ReposHeader, SortContainer, SpaceDown, SpaceFollowers, SpaceName, UserInfo } from './styles.js';
 
-import { Link } from 'react-router-dom';
+const RepoDetails = () => {
 
-import SearchForm from '../../components/SearchForm';
-import GitHubAPI from '../../api/api';
-
-import Header from '../../components/Header';
-
-import { Container, DashboardContainer, Details, RepoDetails, ReposContainer, ReposHeader, SortContainer, SpaceDown, SpaceFollowers, SpaceName, UserInfo } from './styles.js';
-
-const Dashboard = () => {
-
+  const { username, repoName } = useParams();
   const [userData, setUserData] = useState(null);
   const [userRepos, setUserRepos] = useState([]);
   const [selectedRepo, setSelectedRepo] = useState(null);
   const [sortOrder, setSortOrder] = useState('desc');
 
-  const handleSearch = async (username) => {
+  useEffect(() => {
 
-    const [user, repos] = await Promise.all([
-      await GitHubAPI.getUserDetails(username),
-      await GitHubAPI.getUserRepos(username)
-    ]);
+    const fetchData = async () => {
+      try {
+        const user = await GitHubAPI.getUserDetails(username);
+        setUserData(user || {});
 
-    setUserData(user || []);
+        const repoDetails = await GitHubAPI.getRepoDetails(repoName);
+        setSelectedRepo(repoDetails || null);
+      } catch (error) {
+        toast.error(`Erro ao buscar dados: ${error.message}`);
+      }
+    };
 
-    if (!user) {
-      toast.error(`Nenhuma conta localizada com o GitHub Username: ${username}`)
-    }
-
-    setUserRepos(sortRepos(repos, 'desc') || []);
-  };
+    fetchData();
+  }, [username, repoName, sortOrder]);
 
   const handleSortChange = async (event) => {
-
     const newOrder = event.target.value;
     setSortOrder(newOrder);
 
@@ -60,8 +56,7 @@ const Dashboard = () => {
     <Container>
       <Header />
       <DashboardContainer>
-        <h1>Dashboard</h1>
-        <SearchForm onSearch={handleSearch} />
+        <h1>Repo Details</h1>
         {userRepos?.length > 0 && (
           <ReposContainer>
             <ReposHeader>
@@ -89,15 +84,17 @@ const Dashboard = () => {
                 </Details>
               </UserInfo>
             </ReposHeader>
-            <ul>
-              {userRepos.map((repo, index) => (
-                <li key={repo.id}>
-                  <Link to={`/dashboard/${repo.owner.login}/repos/${repo.name}`}>
-                    {index + 1} - {repo.name} - Stars: {repo.stargazers_count}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {selectedRepo && (
+              <RepoDetailsComponent>
+                <p>Name: {selectedRepo.name}</p>
+                <p>Language: {selectedRepo.language}</p>
+                <p>Description: {selectedRepo.description}</p>
+                <p>Stars: {selectedRepo.stargazers_count}</p>
+                <a href={selectedRepo.html_url} target="_blank" rel="noopener noreferrer">
+                  View on GitHub
+                </a>
+              </RepoDetailsComponent>
+            )}
           </ReposContainer>
         )}
       </DashboardContainer>
@@ -105,4 +102,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default RepoDetails;
