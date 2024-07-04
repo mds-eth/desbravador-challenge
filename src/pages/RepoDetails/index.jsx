@@ -4,11 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { FaArrowLeft } from "react-icons/fa";
 
-import Header from '../../components/Header/index';
+import Header from '@components/Header/index';
+import Tooltip from '@components/Tooltip';
 
-import { useGitHubContext } from '../../contexts/GitHubContext';
-
-import Tooltip from '../../components/Tooltip';
+import { useGitHubContext } from '@contexts/GitHubContext';
 
 import {
   Container,

@@ -3,10 +3,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { useSessionContext } from '../../contexts/AuthContext';
-import { validationSchema } from '../../schemas/loginSchemaValidation';
+import { useSessionContext } from '@contexts/AuthContext';
+import { validationSchema } from '@schemas/loginSchemaValidation';
 
-import { PageContainer, LoginContainer, ErrorMessage } from './styles.js';
+import { PageContainer, LoginContainer, ErrorMessage } from './styles';
 
 const Login = () => {
 

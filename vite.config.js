@@ -3,13 +3,11 @@ import react from '@vitejs/plugin-react-swc'
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://api.github.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
+  resolve: {
+    alias: {
+      '@contexts': '/src/contexts',
+      '@components': '/src/components',
+      '@schemas': '/src/schemas',
     },
   },
 })

@@ -4,12 +4,23 @@ import { Link } from 'react-router-dom';
 
 import Skeleton from 'react-loading-skeleton';
 
-import SearchForm from '../../components/SearchForm';
+import SearchForm from '@components/SearchForm';
+import Header from '@components/Header';
 
-import Header from '../../components/Header';
+import { useGitHubContext } from '@contexts/GitHubContext';
 
-import { Container, DashboardContainer, Details, ReposContainer, ReposHeader, SortContainer, SpaceDown, SpaceFollowers, SpaceName, UserInfo } from './styles.js';
-import { useGitHubContext } from '../../contexts/GitHubContext';
+import {
+  Container,
+  DashboardContainer,
+  Details,
+  ReposContainer,
+  ReposHeader,
+  SortContainer,
+  SpaceDown,
+  SpaceFollowers,
+  SpaceName,
+  UserInfo
+} from './styles';
 
 const Dashboard = () => {
 
