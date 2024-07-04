@@ -48,7 +48,7 @@ export const DashboardContainer = styled.div`
     }
   }
 
-  @media(max-width: 680px){
+  @media(max-width: 980px){
     width: 90%;
     padding: 0px 10px;
   }

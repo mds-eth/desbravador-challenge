@@ -40,14 +40,11 @@ export const GitHubProvider = ({ children }) => {
   const handleSortChange = async (event) => {
 
     const newOrder = event.target.value;
+
     setSortOrder(newOrder);
 
-    if (userData) {
-      const repos = await GitHubAPI.getUserRepos(userData.login);
-      const sortedRepos = sortRepos(repos, newOrder);
-      setUserRepos(sortedRepos);
-      setSelectedRepo(null);
-    }
+    setUserRepos(sortRepos(userRepos, newOrder));
+    setSelectedRepo(null);
   };
 
   const sortRepos = (repos, order) => {

@@ -8,6 +8,8 @@ import Header from '../../components/Header/index';
 
 import { useGitHubContext } from '../../contexts/GitHubContext';
 
+import Tooltip from '../../components/Tooltip';
+
 import {
   Container,
   DashboardContainer,
@@ -27,7 +29,7 @@ const RepoDetails = () => {
   const navigate = useNavigate();
 
   const { userData, selectedRepo } = useGitHubContext();
-  console.log(userData, selectedRepo)
+
   const handleBackClick = () => {
     navigate('/dashboard');
   };
@@ -37,7 +39,9 @@ const RepoDetails = () => {
       <Header />
       <DashboardContainer>
         <HeaderRepoDetails>
-          <FaArrowLeft onClick={handleBackClick} style={{ cursor: 'pointer' }} />
+          <Tooltip content="Voltar">
+            <FaArrowLeft onClick={handleBackClick} style={{ cursor: 'pointer' }} />
+          </Tooltip>
           <h1>Repo Details</h1>
           <div />
         </HeaderRepoDetails>
@@ -62,7 +66,7 @@ const RepoDetails = () => {
           </ReposHeader>
           {selectedRepo ? (
             <RepoDetailsComponent>
-              <p>Name: {selectedRepo?.name}</p>
+              <p>Repository Name: {selectedRepo?.name}</p>
               <p>Language: {selectedRepo?.language}</p>
               <p>Description: {selectedRepo?.description}</p>
               <p>Stars: {selectedRepo?.stargazers_count}</p>

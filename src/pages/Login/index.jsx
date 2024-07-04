@@ -6,11 +6,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useSessionContext } from '../../contexts/AuthContext';
 import { validationSchema } from '../../schemas/loginSchemaValidation';
 
-import { PageContainer, LoginContainer } from './styles.js';
+import { PageContainer, LoginContainer, ErrorMessage } from './styles.js';
 
 const Login = () => {
 
-  const { loading, handleCreateSession } = useSessionContext();
+  const { handleCreateSession } = useSessionContext();
 
   const { handleSubmit, formState: { errors }, register } = useForm({
     resolver: yupResolver(validationSchema),
@@ -31,10 +31,12 @@ const Login = () => {
         <form onSubmit={handleSubmit(handleCreate)}>
 
           <label htmlFor="email">E-mail:</label>
-          <input {...register('email')} type="text" id="email" name="email" placeholder='Seu melhor e-mail' />
+          <input {...register('email')} type="text" id="email" name="email" placeholder='Seu melhor e-mail' className={errors?.email ? 'error-input' : ''} />
+          {errors?.email && <ErrorMessage>{errors?.email.message}</ErrorMessage>}
 
           <label htmlFor="password">Password:</label>
-          <input {...register('password')} type="password" id="password" name="password" placeholder='Sua senha' />
+          <input {...register('password')} type="password" id="password" name="password" placeholder='Sua senha' className={errors?.password ? 'error-input' : ''} />
+          {errors?.password && <ErrorMessage>{errors?.password.message}</ErrorMessage>}
 
           <button type="submit">Login</button>
         </form>
