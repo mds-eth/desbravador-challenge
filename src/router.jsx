@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
-import Login from './pages/Login';
-import NotFound from './pages/NotFound';
-import Dashboard from './pages/Dashboard';
-import RepoDetails from './pages/RepoDetails';
+import Login from '@pages/Login';
+import NotFound from '@pages/NotFound';
+import Dashboard from '@pages/Dashboard';
+import RepoDetails from '@pages/RepoDetails';
 
-import { useSessionContext } from './contexts/AuthContext';
+import { useSessionContext } from '@contexts/AuthContext';
 
 const AppRouter = () => {
 

@@ -8,6 +8,7 @@ export default defineConfig({
       '@contexts': '/src/contexts',
       '@components': '/src/components',
       '@schemas': '/src/schemas',
+      '@pages': '/src/pages',
     },
   },
 })
