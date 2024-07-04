@@ -54,6 +54,12 @@ export const DashboardContainer = styled.div`
   }
 `
 
+export const HeaderRepoDetails = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
 export const ReposContainer = styled.div`
   margin-top: 20px;
 

@@ -2,8 +2,13 @@ import React, { useState } from 'react';
 
 import { toast } from 'react-toastify';
 
+import { useGitHubContext } from '../../contexts/GitHubContext';
+
 const SearchForm = ({ onSearch }) => {
-  const [username, setUsername] = useState('');
+
+  const { userName } = useGitHubContext();
+
+  const [username, setUsername] = useState(userName || '');
 
   const handleSubmit = (event) => {
     event.preventDefault();

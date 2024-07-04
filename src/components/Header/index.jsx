@@ -4,7 +4,7 @@ import { IoIosLogOut } from "react-icons/io";
 
 import { useSessionContext } from '../../contexts/AuthContext';
 
-import { HeaderComponent } from './styles.js';
+import { HeaderComponent } from './styles';
 
 const Header = () => {
   const { logout } = useSessionContext();

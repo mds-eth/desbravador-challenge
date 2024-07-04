@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useSessionContext } from '../../contexts/AuthContext';
 import { validationSchema } from '../../schemas/loginSchemaValidation';
 
-import { LoginContainer } from './styles.js';
+import { PageContainer, LoginContainer } from './styles.js';
 
 const Login = () => {
 
@@ -17,7 +17,6 @@ const Login = () => {
   });
 
   const handleCreate = async (data) => {
-    console.log(data)
     const response = await handleCreateSession(data);
 
     if (response) {
@@ -26,19 +25,21 @@ const Login = () => {
   }
 
   return (
-    <LoginContainer>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit(handleCreate)}>
+    <PageContainer>
+      <LoginContainer>
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit(handleCreate)}>
 
-        <label htmlFor="email">E-mail:</label>
-        <input {...register('email')} type="text" id="email" name="email" placeholder='Seu melhor e-mail' />
+          <label htmlFor="email">E-mail:</label>
+          <input {...register('email')} type="text" id="email" name="email" placeholder='Seu melhor e-mail' />
 
-        <label htmlFor="password">Password:</label>
-        <input {...register('password')} type="password" id="password" name="password" placeholder='Sua senha' />
+          <label htmlFor="password">Password:</label>
+          <input {...register('password')} type="password" id="password" name="password" placeholder='Sua senha' />
 
-        <button type="submit">Login</button>
-      </form>
-    </LoginContainer>
+          <button type="submit">Login</button>
+        </form>
+      </LoginContainer>
+    </PageContainer>
   );
 }
 
